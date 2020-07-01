@@ -6,8 +6,14 @@ const net = require('net');
 const connect = function() {
   const conn = net.createConnection({ 
     host: 'localhost',
-    port: 50541
+    port: 50541,
   });
+  const name = 'sRg'
+
+  conn.on("connect", () => {
+    console.log(name, "Successfully connected to game server");
+    
+  })
   // interpret incoming data as text
   conn.setEncoding('utf8'); 
   conn.on('data', (data) => {
@@ -18,5 +24,3 @@ const connect = function() {
 }
 
 module.exports = connect;
-console.log('Connecting ...');
-connect();
