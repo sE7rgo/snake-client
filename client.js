@@ -5,13 +5,12 @@ const net = require('net');
  */
 const connect = function() {
   const conn = net.createConnection({ 
-    host: 'localhost',
+    host: '135.23.222.148',
     port: 50541,
   });
-  const name = 'sRg'
-
+ 
   conn.on("connect", () => {
-    console.log(name, "Successfully connected to game server");
+    conn.write('Name: sRg')
     
   })
   // interpret incoming data as text
@@ -22,21 +21,7 @@ const connect = function() {
 
   return conn;
 }
-/**
- * Setup User Interface 
- * Specifically, so that we can handle user input via stdin
- */
-const setupInput = function() {
-  const stdin = process.stdin;
-  stdin.setRawMode(true);
-  stdin.setEncoding('utf8');
-  stdin.resume();
-  const handleUserInput = stdin.on('data', (key) => {
-    if (key === '\u0003') {
-      process.exit();
-    }
-  });
-  return stdin;
-}
 
-module.exports = connect, setupInput;
+
+
+module.exports = connect
